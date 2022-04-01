@@ -69,7 +69,7 @@ public class Calculator extends Search {
             if (isNumeric(op1) && isNumeric(op3)) {
                 num1 = Integer.parseInt(op1);
                 num2 = Integer.parseInt(op3);
-                if (num1 <= 10 && num2 <= 10) {
+                if ((num1 <= 10 && num1 >= 1) && (num2 <= 10 && num2 >= 1)) {
                     result = calculate(num1, operation, num2);
                     System.out.println(num1 + " " + operation + " " + num2 + " = " + result);
                 } else{
@@ -79,7 +79,7 @@ public class Calculator extends Search {
                 num1 = romanToInt(op1);
                 num2 = romanToInt(op3);
 
-                if (num1 <= 10 && num2 <=10) {
+                if ((num1 <= 10 && num1 >= 1) && (num2 <= 10 && num2 >= 1))  {
                     result = calculate(num1, operation, num2);
                     if(result < 0) {
                         throw new CalculatorException("There are no negative numbers in Roman Numeral System.");
