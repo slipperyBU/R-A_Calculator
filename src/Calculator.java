@@ -28,23 +28,8 @@ public class Calculator extends Search {
         }
         return result;
     }
-    public static int romanToInt(String s) {
-        int res = RomanNumerals.valueOf(s.substring(s.length()-1)).getValue();
 
-        for(int idx = s.length()-2; idx >= 0; idx--){
-            RomanNumerals cur  = RomanNumerals.C.valueOf(s.substring(idx,idx+1));
-            RomanNumerals next = RomanNumerals.C.valueOf(s.substring(idx+1,idx+2));
-            if(cur.getValue() < next.getValue()){
-                res -= cur.getValue();
-            }else{
-                res += cur.getValue();
-            }
-        }
-
-        return res;
-    }
-
-    public static String intToRoman (int number) {
+    public static String intToRoman (int number) throws CalculatorException {
         StringBuilder romanVal = new StringBuilder();
         for (RomanNumerals rs: RomanNumerals.values()){
             while(number >= rs.getValue()) {
@@ -76,8 +61,8 @@ public class Calculator extends Search {
                     throw new CalculatorException("Input is invalid. Try again.");
                 }
             } else {
-                num1 = romanToInt(op1);
-                num2 = romanToInt(op3);
+                num1 = RomanNumerals.romanToNumber(op1);
+                num2 = RomanNumerals.romanToNumber(op3);
 
                 if ((num1 <= 10 && num1 >= 1) && (num2 <= 10 && num2 >= 1))  {
                     result = calculate(num1, operation, num2);
@@ -96,7 +81,7 @@ public class Calculator extends Search {
         }
     private static boolean isNumeric(String str) {
         try {
-            int d = Integer.parseInt(str);
+            int k = Integer.parseInt(str);
         } catch (NumberFormatException e) {
             return false;
         }
